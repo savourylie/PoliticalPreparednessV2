@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/repsearch"
+    android:id="@+id/navigation_rep_search"
     app:startDestination="@+id/repsearch_fragment">
     <fragment
         android:id="@+id/repsearch_fragment"

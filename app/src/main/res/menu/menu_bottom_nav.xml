@@ -17,7 +17,7 @@
         android:title="@string/title_rep_search" />
 
     <item
-        android:id="@+id/navigation_rep_search_result"
+        android:id="@+id/navigation_mylocsearch"
         android:icon="@drawable/ic_person_pin_circle_white_24dp"
         android:title="@string/title_rep_search_result" />
 </menu>

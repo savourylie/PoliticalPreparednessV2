@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/upcoming">
+    app:startDestination="@+id/navigation_upcoming">
 
     <include app:graph="@navigation/upcoming"/>
     <include app:graph="@navigation/saved"/>
