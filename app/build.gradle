@@ -50,5 +50,4 @@ dependencies {
     implementation "androidx.navigation:navigation-testing:$navigation"
     implementation "androidx.navigation:navigation-ui:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
-    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
 }
