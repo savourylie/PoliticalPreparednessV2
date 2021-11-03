@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/saved">
+    <fragment
+        android:id="@+id/saved_fragment"
+        android:name="com.onionmonster.politicalpreparednessv2.savedscreen.SavedFragment"
+        android:label="@string/saved_label"
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_saved_to_details"
+            app:destination="@+id/saved_details_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saved_details_fragment"
+        android:name="com.onionmonster.politicalpreparednessv2.savedscreen.SavedDetailsFragment"
+        android:label="@string/saved_details_label"
+        tools:layout="@layout/fragment_saved_details">
+    </fragment>
+</navigation>

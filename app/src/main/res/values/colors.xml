@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#344955</color>
+    <color name="colorSecondary">#F9AA33</color>
+    <color name="colorAccent">#4827BA</color>
+    <color name="colorBarTitle">#F2F2F2</color>
+    <color name="colorItemTitle">#333333</color>
+    <color name="colorItemSubtitle">#828282</color>
+    <color name="colorMainText">#4F4F4F</color>
+    <color name="colorHint">#BDBDBD</color>
+    <color name="election_divider">#828282</color>
+</resources>

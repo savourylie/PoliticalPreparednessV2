@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PoliticalPreparednessV2</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="upcoming_label">Upcoming Elections</string>
+    <string name="upcoming_details_label">Election Details</string>
+    <string name="saved_label">Upcoming Elections</string>
+    <string name="saved_details_label">Election Details</string>
+    <string name="rep_search_label">Rep Search</string>
+    <string name="rep_search_result_label">Rep Search Results</string>
+    <string name="my_location_search_label">My Location Search</string>
+
+    <string name="title_upcoming">Upcoming Events</string>
+    <string name="title_saved">Saved Events</string>
+    <string name="title_rep_search">Rep Search</string>
+    <string name="title_rep_search_result">Search Result</string>
+</resources>

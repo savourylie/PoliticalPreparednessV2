@@ -1,0 +1,12 @@
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/upcoming">
+
+    <include app:graph="@navigation/upcoming"/>
+    <include app:graph="@navigation/saved"/>
+    <include app:graph="@navigation/repsearch"/>
+    <include app:graph="@navigation/mylocsearch"/>
+
+</navigation>
