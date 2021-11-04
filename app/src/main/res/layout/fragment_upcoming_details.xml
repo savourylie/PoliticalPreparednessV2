@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="election"
@@ -8,17 +10,98 @@
             name="viewModel"
             type="com.onionmonster.politicalpreparednessv2.upcomingscreen.UpcomingDetailsViewModel" />
     </data>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".upcomingscreen.UpcomingDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#FFDC64">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/election_details_title"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@color/colorSecondary"
+            android:fontFamily="@font/roboto_black"
+            android:paddingStart="23dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="23dp"
+            android:text="@{election.title}"
+            android:textColor="@color/colorItemTitle"
+            android:textSize="18sp"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/election_details_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="23dp"
+            android:text="@{election.datetime}"
+            android:textColor="@color/colorItemSubtitle"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/election_details_title"
+            app:layout_constraintVertical_bias="0.054"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/voting_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="23dp"
+            android:text="Voting Location"
+            android:textColor="@color/colorItemTitle"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/election_details_date"
+            app:layout_constraintVertical_bias="0.21"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/ballot_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="23dp"
+            android:text="Ballot Information"
+            android:textColor="@color/colorItemTitle"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/voting_location"
+            app:layout_constraintVertical_bias="0.036"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/follow_election_button"
+            android:layout_width="113dp"
+            android:layout_height="78dp"
+            android:background="@color/colorSecondary"
+            app:backgroundTint="@null"
+            android:elevation="10dp"
+            android:stateListAnimator="@null"
+            android:fontFamily="@font/roboto_black"
+            android:lineSpacingExtra="4dp"
+            android:text="Follow Election"
+            android:textColor="@color/colorItemTitle"
+            android:textAllCaps="false"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ballot_info"
+            app:layout_constraintVertical_bias="0.135" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="23dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

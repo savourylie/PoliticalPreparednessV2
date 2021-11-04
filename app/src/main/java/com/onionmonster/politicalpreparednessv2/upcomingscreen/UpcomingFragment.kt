@@ -44,7 +44,7 @@ class UpcomingFragment : Fragment() {
             adapter = electionAdapter
         }
 
-        viewModel.navigateToElectionDetail.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToElectionDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 this.findNavController().navigate(
                     UpcomingFragmentDirections.actionUpcomingToDetails(it)
@@ -54,7 +54,7 @@ class UpcomingFragment : Fragment() {
             }
         })
 
-        viewModel.electionList.observe(viewLifecycleOwner, Observer<List<Election>> { elections ->
+        viewModel.electionList.observe(viewLifecycleOwner, { elections ->
             elections?.apply {
                 electionAdapter.submitList(elections)
             }

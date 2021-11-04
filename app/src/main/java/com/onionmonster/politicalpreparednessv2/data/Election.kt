@@ -1,8 +1,11 @@
 package com.onionmonster.politicalpreparednessv2.data
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
-data class Election(val id: String, val title: String, val datetime: String, val saved: Int)
+@Parcelize
+data class Election(val id: String, val title: String, val datetime: String, val saved: Int): Parcelable
 
 data class ElectionDetails(val id: String,
                            val title: String,

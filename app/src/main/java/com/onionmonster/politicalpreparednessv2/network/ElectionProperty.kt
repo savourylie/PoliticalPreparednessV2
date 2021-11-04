@@ -1,5 +1,6 @@
 package com.onionmonster.politicalpreparednessv2.network
 
+import com.onionmonster.politicalpreparednessv2.data.ElectionDetails
 import com.onionmonster.politicalpreparednessv2.database.DatabaseElection
 
 data class ElectionQueryProperty(
@@ -17,10 +18,16 @@ data class ElectionProperty(
 data class ElectionDetailsQueryProperty(
     val kind: String,
     val election: ElectionProperty,
-    val normalizedInput: String,
+    val normalizedInput: NormalizedInput,
     val stateList: List<State>
 )
 
+data class NormalizedInput(
+    val line1: String,
+    val city: String,
+    val state: String,
+    val zip: String
+)
 data class State(
     val name: String,
     val electionAdministrationBody: ElectionAdministrationBody,
@@ -60,4 +67,17 @@ fun ElectionQueryProperty.asDatabaseModel(): Array<DatabaseElection> {
                     saved = 0
                 )
             }.toTypedArray()
+}
+
+fun ElectionDetailsQueryProperty.asDomainModel(): ElectionDetails {
+    return ElectionDetails(id = election.id,
+                           title = election.name,
+                           electionDay = election.electionDay,
+                           votingLocation = stateList[0]
+                                                .electionAdministrationBody
+                                                .votingLocationFinderUrl,
+                           ballotInfo = stateList[0]
+                                            .electionAdministrationBody
+                                            .ballotInfoUrl
+                            )
 }
