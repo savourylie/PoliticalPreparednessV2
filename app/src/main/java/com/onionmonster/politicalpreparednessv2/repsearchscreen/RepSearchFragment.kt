@@ -5,29 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.onionmonster.politicalpreparednessv2.R
+import androidx.lifecycle.ViewModelProvider
+import com.onionmonster.politicalpreparednessv2.databinding.FragmentRepSearchBinding
+import com.onionmonster.politicalpreparednessv2.databinding.FragmentRepSearchBindingImpl
+import android.widget.ArrayAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import android.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RepSearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+import android.widget.Spinner
+
+
+
+
 class RepSearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    val TAG = "Dev/" + javaClass.simpleName
+    lateinit var binding: FragmentRepSearchBinding
+
+    private val viewModel: RepSearchViewModel by lazy {
+        ViewModelProvider(this).get(RepSearchViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -35,26 +31,15 @@ class RepSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rep_search, container, false)
-    }
+        val binding = FragmentRepSearchBindingImpl.inflate(inflater)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RepSearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RepSearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val states = resources.getStringArray(R.array.states)
+//        val states = arrayOf("Arizona", "California", "Delaware")
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, states)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+        return binding.root
     }
 }

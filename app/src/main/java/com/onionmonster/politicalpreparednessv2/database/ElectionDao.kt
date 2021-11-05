@@ -17,7 +17,7 @@ interface ElectionDao {
 
     @Query("SELECT * FROM elections WHERE id=:electionId")
 //    fun getElectionById(electionId: String): LiveData<List<DatabaseElection>>
-    fun getElectionById(electionId: String): LiveData<DatabaseElection>
+    suspend fun getElectionById(electionId: String): DatabaseElection?
 
     @Query("UPDATE elections SET saved=:saved WHERE id=:electionId")
     fun updateSaveStatus(electionId: String, saved: Int)

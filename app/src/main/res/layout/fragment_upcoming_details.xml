@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFDC64">
+        android:background="@color/colorAppBackground">
 
         <TextView
             android:id="@+id/election_details_title"

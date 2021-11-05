@@ -1,4 +1,4 @@
-package com.onionmonster.politicalpreparednessv2.upcomingscreen
+package com.onionmonster.politicalpreparednessv2.savedscreen
 
 import android.app.Application
 import android.util.Log
@@ -13,10 +13,8 @@ import com.onionmonster.politicalpreparednessv2.network.asDomainModel
 import com.onionmonster.politicalpreparednessv2.network.getElectionDetails
 import com.onionmonster.politicalpreparednessv2.repository.ElectionRepository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.selects.select
 
-
-class UpcomingDetailsViewModel(election: Election, application: Application) : AndroidViewModel(application) {
+class SavedDetailsViewModel(election: Election, application: Application) : AndroidViewModel(application)  {
 
     val TAG = "Dev/" + javaClass.simpleName
 
@@ -40,20 +38,12 @@ class UpcomingDetailsViewModel(election: Election, application: Application) : A
     init {
         _selectedElection.value = election
 
-        Log.d(TAG, "Election: " + _selectedElection.value.toString())
-
         viewModelScope.launch {
             _electionSaveStatus.value = electionRepository.getElectionSaveStatus(election)
-        }
 
-
-        Log.d(TAG, _electionSaveStatus.value.toString())
-
-        viewModelScope.launch {
             val electionDetailsQueryProperty = getElectionDetails(election.id)
             _electionDetails.value = electionDetailsQueryProperty?.asDomainModel()
 
-            Log.d(TAG, electionDetailsQueryProperty.toString())
         }
     }
 
@@ -63,10 +53,9 @@ class UpcomingDetailsViewModel(election: Election, application: Application) : A
         viewModelScope.launch {
             election.let {
                 electionRepository.setElectionSaveStatus(
-                    it, SaveStatus)
+                    it, SaveStatus
+                )
             }
         }
     }
-
-
 }

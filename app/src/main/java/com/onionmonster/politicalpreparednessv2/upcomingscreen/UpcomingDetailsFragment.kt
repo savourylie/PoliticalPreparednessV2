@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.onionmonster.politicalpreparednessv2.R
-import com.onionmonster.politicalpreparednessv2.databinding.FragmentUpcomingBinding
 import com.onionmonster.politicalpreparednessv2.databinding.FragmentUpcomingDetailsBinding
 import android.content.Intent
 import android.net.Uri
@@ -27,7 +24,7 @@ class UpcomingDetailsFragment : Fragment() {
         val binding = FragmentUpcomingDetailsBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val election = UpcomingDetailsFragmentArgs.fromBundle(arguments!!).selectedElection
+        val election = UpcomingDetailsFragmentArgs.fromBundle(requireArguments()).selectedElection
         val viewModelFactory = UpcomingDetailsViewModelFactory(election, application)
 
         binding.election = election
@@ -64,8 +61,6 @@ class UpcomingDetailsFragment : Fragment() {
                 startActivity(browserIntent)
             }
         })
-
-
 
         return binding.root
     }

@@ -13,4 +13,12 @@
     <string name="title_saved">Saved Events</string>
     <string name="title_rep_search">Rep Search</string>
     <string name="title_rep_search_result">Search Result</string>
+
+    <string-array name="states">
+        <item>Alabama</item>
+        <item>California</item>
+        <item>Delaware</item>
+        <item>Florida</item>
+        <item>Georgia</item>
+    </string-array>
 </resources>

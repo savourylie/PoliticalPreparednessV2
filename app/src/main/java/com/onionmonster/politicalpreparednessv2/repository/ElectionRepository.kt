@@ -23,6 +23,10 @@ class ElectionRepository(private val database: ElectionsDatabase) {
         it.asDomainModel()
     }
 
+    val elections_saved: LiveData<List<Election>> = Transformations.map(database.electionDao.getSavedElections()) {
+        it.asDomainModel()
+    }
+
     suspend fun refreshElections() {
         withContext(Dispatchers.IO) {
             val electionQueryProperty = getElectionTitles()
@@ -33,17 +37,12 @@ class ElectionRepository(private val database: ElectionsDatabase) {
         }
     }
 
-    fun getElectionSaveStatus(election: Election): Int? {
+    suspend fun getElectionSaveStatus(election: Election): Int? {
         val databaseElections = database.electionDao.getElectionById(election.id)
-        val allElections = database.electionDao.getElections()
 
         Log.d(TAG, "electionId: " + election.id)
-        Log.d(TAG, "Get all elections: " + allElections.value.toString())
-//        Log.d(TAG, databaseElections.value!![0].toString())
-//        Log.d(TAG, databaseElections.value!!.toString())
 
-//        return databaseElections.value?.get(0)?.saved
-        return databaseElections.value?.saved
+        return databaseElections?.saved
     }
 
     suspend fun setElectionSaveStatus(election: Election, saveStatus: Int) {

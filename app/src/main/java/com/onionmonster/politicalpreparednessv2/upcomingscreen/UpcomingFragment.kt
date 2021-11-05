@@ -30,14 +30,11 @@ class UpcomingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_upcoming, container, false)
-
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
-
-        // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        electionAdapter = ElectionAdapter(viewModel, binding)
+        electionAdapter = ElectionAdapter(viewModel)
 
         binding.recyclerUpcomingElection.apply {
             setHasFixedSize(true)

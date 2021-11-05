@@ -18,5 +18,9 @@
         android:name="com.onionmonster.politicalpreparednessv2.savedscreen.SavedDetailsFragment"
         android:label="@string/saved_details_label"
         tools:layout="@layout/fragment_saved_details">
+
+        <argument
+            android:name="selectedElection"
+            app:argType="com.onionmonster.politicalpreparednessv2.data.Election" />
     </fragment>
 </navigation>

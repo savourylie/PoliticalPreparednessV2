@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
+
 import androidx.recyclerview.widget.RecyclerView
 import com.onionmonster.politicalpreparednessv2.R
 import com.onionmonster.politicalpreparednessv2.data.Election
@@ -15,7 +16,6 @@ import com.onionmonster.politicalpreparednessv2.databinding.FragmentUpcomingBind
 
 class ElectionViewHolder private constructor (itemView: View,
                                               private val electionListener: OnElectionSelectedListener,
-                                              private val binding: FragmentUpcomingBinding,
                                              ): RecyclerView.ViewHolder(itemView) {
 
     private val container: CardView = itemView.findViewById(R.id.election_item)
@@ -31,18 +31,17 @@ class ElectionViewHolder private constructor (itemView: View,
             electionListener.onElectionClicked(event)
         }
 
-        binding.executePendingBindings()
+//        binding.executePendingBindings()
     }
 
     companion object {
         fun from(parent: ViewGroup,
                  electionListener: OnElectionSelectedListener,
-                 binding: FragmentUpcomingBinding,
                  ): ElectionViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val view = layoutInflater.inflate(R.layout.election_item, parent, false) as CardView
 
-            return ElectionViewHolder(view, electionListener, binding)
+            return ElectionViewHolder(view, electionListener)
         }
     }
 }
