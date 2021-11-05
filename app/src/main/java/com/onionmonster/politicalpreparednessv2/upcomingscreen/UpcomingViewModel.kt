@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 enum class ElectionApiStatus {LOADING, ERROR, DONE}
 
 
-class UpcomingViewModel(application: Application) : AndroidViewModel(application), OnElectionSelectedListener, OnSaveIconSelectedListener {
+class UpcomingViewModel(application: Application): AndroidViewModel(application), OnElectionSelectedListener, OnSaveIconSelectedListener {
     val TAG = "Dev/" + javaClass.simpleName
 
     private val database = getDatabase(application)

@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.onionmonster.politicalpreparednessv2.R
 import com.onionmonster.politicalpreparednessv2.data.Election
-import com.onionmonster.politicalpreparednessv2.databinding.FragmentUpcomingBinding
 
 
 class ElectionViewHolder private constructor (itemView: View,

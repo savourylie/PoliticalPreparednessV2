@@ -21,9 +21,6 @@ class SavedViewModel(application: Application):
     private val electionRepository = ElectionRepository(database)
 
     init {
-        viewModelScope.launch {
-            electionRepository.refreshElections()
-        }
     }
 
     val electionList = electionRepository.elections_saved

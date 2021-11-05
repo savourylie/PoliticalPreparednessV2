@@ -18,5 +18,9 @@
         android:name="com.onionmonster.politicalpreparednessv2.repsearchscreen.RepSearchFragment"
         android:label="@string/rep_search_label"
         tools:layout="@layout/fragment_rep_search_result">
+
+        <argument
+            android:name="myAddress"
+            app:argType="com.onionmonster.politicalpreparednessv2.data.Address" />
     </fragment>
 </navigation>

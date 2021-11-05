@@ -49,15 +49,13 @@ class UpcomingDetailsFragment : Fragment() {
         viewModel.electionDetails.observe(viewLifecycleOwner, { eDetails ->
             binding.votingLocation.setOnClickListener {
                 val browserIntent = Intent(Intent.ACTION_VIEW)
-//                browserIntent.data = Uri.parse(eDetails.votingLocation)
-                browserIntent.data = Uri.parse("https://www.google.com")
+                browserIntent.data = Uri.parse(eDetails.votingLocation)
                 startActivity(browserIntent)
             }
 
             binding.ballotInfo.setOnClickListener {
                 val browserIntent = Intent(Intent.ACTION_VIEW)
-                browserIntent.data = Uri.parse("https://www.bing.com")
-//                browserIntent.data = Uri.parse(eDetails.ballotInfo)
+                browserIntent.data = Uri.parse(eDetails.ballotInfo)
                 startActivity(browserIntent)
             }
         })

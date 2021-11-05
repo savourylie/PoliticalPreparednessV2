@@ -12,7 +12,7 @@ interface ElectionDao {
     @Query("SELECT * FROM elections WHERE saved = 1")
     fun getSavedElections(): LiveData<List<DatabaseElection>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(vararg elections: DatabaseElection)
 
     @Query("SELECT * FROM elections WHERE id=:electionId")

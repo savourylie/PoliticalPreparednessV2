@@ -44,16 +44,8 @@ class UpcomingDetailsViewModel(election: Election, application: Application) : A
 
         viewModelScope.launch {
             _electionSaveStatus.value = electionRepository.getElectionSaveStatus(election)
-        }
-
-
-        Log.d(TAG, _electionSaveStatus.value.toString())
-
-        viewModelScope.launch {
             val electionDetailsQueryProperty = getElectionDetails(election.id)
             _electionDetails.value = electionDetailsQueryProperty?.asDomainModel()
-
-            Log.d(TAG, electionDetailsQueryProperty.toString())
         }
     }
 

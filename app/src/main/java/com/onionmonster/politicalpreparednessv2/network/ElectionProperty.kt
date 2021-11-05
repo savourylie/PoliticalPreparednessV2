@@ -16,46 +16,61 @@ data class ElectionProperty(
 )
 
 data class ElectionDetailsQueryProperty(
-    val kind: String,
     val election: ElectionProperty,
-    val normalizedInput: NormalizedInput,
-    val stateList: List<State>
+    val state: List<State>
 )
 
-data class NormalizedInput(
-    val line1: String,
-    val city: String,
-    val state: String,
-    val zip: String
-)
 data class State(
-    val name: String,
-    val electionAdministrationBody: ElectionAdministrationBody,
-    val sources: List<Source>
+    val electionAdministrationBody: ElectionAdministrationBody
 )
 
 data class ElectionAdministrationBody(
-    val name: String,
-    val electionInfoUrl: String,
-    val electionRegistrationUrl: String,
-    val electionRegistrationConfirmationUrl: String,
-    val absenteeVotingInfoUrl: String,
     val votingLocationFinderUrl: String,
-    val ballotInfoUrl: String,
-    val correspondenceAddress: CorrespondenceAddress
+    val ballotInfoUrl: String
 )
 
-data class CorrespondenceAddress(
-    val line1: String,
-    val city: String,
-    val state: String,
-    val zip: String
-)
 
-data class Source(
-    val name: String,
-    val official: Boolean
-)
+//data class ElectionDetailsQueryProperty(
+//    val kind: String,
+//    val election: ElectionProperty,
+//    val normalizedInput: NormalizedInput,
+//    val stateList: List<State>
+//)
+//
+//data class NormalizedInput(
+//    val line1: String,
+//    val city: String,
+//    val state: String,
+//    val zip: String
+//)
+//data class State(
+//    val name: String,
+//    val electionAdministrationBody: ElectionAdministrationBody,
+//    val sources: List<Source>
+//)
+//
+//data class ElectionAdministrationBody(
+//    val name: String,
+//    val electionInfoUrl: String,
+//    val electionRegistrationUrl: String,
+//    val electionRegistrationConfirmationUrl: String,
+//    val absenteeVotingInfoUrl: String,
+//    val votingLocationFinderUrl: String,
+//    val ballotInfoUrl: String,
+//    val correspondenceAddress: CorrespondenceAddress
+//)
+//
+//data class CorrespondenceAddress(
+//    val line1: String,
+//    val city: String,
+//    val state: String,
+//    val zip: String
+//)
+//
+//data class Source(
+//    val name: String,
+//    val official: Boolean
+//)
 
 
 fun ElectionQueryProperty.asDatabaseModel(): Array<DatabaseElection> {
@@ -73,10 +88,10 @@ fun ElectionDetailsQueryProperty.asDomainModel(): ElectionDetails {
     return ElectionDetails(id = election.id,
                            title = election.name,
                            electionDay = election.electionDay,
-                           votingLocation = stateList[0]
+                           votingLocation = state[0]
                                                 .electionAdministrationBody
                                                 .votingLocationFinderUrl,
-                           ballotInfo = stateList[0]
+                           ballotInfo = state[0]
                                             .electionAdministrationBody
                                             .ballotInfoUrl
                             )
