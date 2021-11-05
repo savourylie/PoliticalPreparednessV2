@@ -60,9 +60,9 @@ class RepSearchFragment : Fragment() {
         }
 
         viewModel.navigateToRepList.observe(viewLifecycleOwner, {
-            Log.d(TAG, "navigateToRepList: " + it.toString())
-
             if (it != null) {
+                Log.d(TAG, "navigateToRepList: " + it.toString())
+
                 findNavController().navigate(
                     RepSearchFragmentDirections.actionRepsearchToResult(it)
                 )
