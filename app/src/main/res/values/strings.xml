@@ -14,6 +14,8 @@
     <string name="title_rep_search">Rep Search</string>
     <string name="title_rep_search_result">Search Result</string>
 
+    <string name="location_required_error">Location services must be enabled to use the feature</string>
+
     <string-array name="states">
         <item>AL</item>
         <item>AK</item>

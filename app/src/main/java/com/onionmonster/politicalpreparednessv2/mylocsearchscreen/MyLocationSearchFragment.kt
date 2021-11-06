@@ -1,33 +1,64 @@
 package com.onionmonster.politicalpreparednessv2.mylocsearchscreen
 
+import android.app.Activity
+import android.content.IntentSender
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.material.snackbar.Snackbar
 import com.onionmonster.politicalpreparednessv2.R
+import com.onionmonster.politicalpreparednessv2.databinding.FragmentMyLocationSearchBinding
+import com.onionmonster.politicalpreparednessv2.foregroundLocationPermissionApproved
+import com.onionmonster.politicalpreparednessv2.repsearchscreen.RepAdapter
+import com.onionmonster.politicalpreparednessv2.requestForegroundPermission
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import android.location.Geocoder
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.onionmonster.politicalpreparednessv2.data.Address
+import kotlinx.coroutines.launch
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MyLocationSearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class MyLocationSearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    val TAG = javaClass.simpleName
+
+    lateinit var binding: FragmentMyLocationSearchBinding
+    private lateinit var viewModel: MyLocationSearchViewModel
+    private lateinit var repAdapter: RepAdapter
+    var currentAddress = ""
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            checkDeviceLocationSettingsAndGetAddress()
+        }
+    }
+
+    lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        val mLocationRequest = LocationRequest.create()
+        mLocationRequest.interval = 60000
+        mLocationRequest.fastestInterval = 5000
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
 
     override fun onCreateView(
@@ -35,26 +66,129 @@ class MyLocationSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_location_search, container, false)
+        val application = requireNotNull(activity).application
+        binding = DataBindingUtil.inflate(inflater,
+                                          R.layout.fragment_my_location_search,
+                                          container, false)
+
+        binding.lifecycleOwner = this
+        val viewModelFactory = MyLocationSearchViewModelFactory(application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MyLocationSearchViewModel::class.java)
+
+        binding.viewModel = viewModel
+
+
+        checkDeviceLocationSettingsAndGetAddress()
+
+        viewModel.currentAddress.observe(viewLifecycleOwner) {
+            binding.mylocTitle.text = it
+
+            viewModel.viewModelScope.launch {
+                viewModel.repRepository.refreshReps(Address(it))
+            }
+        }
+
+        repAdapter = RepAdapter()
+
+        binding.recyclerMylocResult.apply {
+            setHasFixedSize(true)
+            adapter = repAdapter
+        }
+
+        viewModel.repList.observe(viewLifecycleOwner) {
+            it?.apply {
+                repAdapter.submitList(it)
+            }
+        }
+
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyLocationSearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyLocationSearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun checkDeviceLocationSettingsAndGetAddress(resolve:Boolean = true) {
+
+        Log.d(TAG, "checkDeviceLocationSettingsAndGetAddress() called.")
+
+        val locationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_LOW_POWER
+        }
+        val locationSettingRequestsBuilder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        val settingsClient = LocationServices.getSettingsClient(requireContext())
+        val locationSettingsResponseTask =
+            settingsClient.checkLocationSettings(locationSettingRequestsBuilder.build())
+
+        locationSettingsResponseTask.addOnFailureListener { exception ->
+
+            if (exception is ResolvableApiException && resolve) {
+                try {
+                    val intentSenderRequest =
+                        IntentSenderRequest.Builder(exception.resolution).build()
+                    resultLauncher.launch(intentSenderRequest)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    Log.d(TAG, "Error getting location settings resolution: " + sendEx.message)
                 }
+            } else {
+                Snackbar.make(
+                    this.requireView(),
+                    R.string.location_required_error, Snackbar.LENGTH_INDEFINITE
+                ).setAction(android.R.string.ok) {
+                    checkDeviceLocationSettingsAndGetAddress()
+                }.show()
             }
+        }
+
+        locationSettingsResponseTask.addOnCompleteListener {
+            if ( it.isSuccessful ) {
+                Log.d(TAG, "Device location enabled")
+                enableMyLocationAndGetMyAddress()
+            }
+        }
     }
+
+    private fun enableMyLocationAndGetMyAddress() {
+        Log.d(TAG, "enableMyLocationAndGetMyAddress() called.")
+
+        if (!foregroundLocationPermissionApproved(requireContext())) {
+
+            requestForegroundPermission(requireContext(), ::requestPermissions)
+        } else {
+
+            Log.d(TAG, "Foreground permission granted.")
+
+            val gCoder = Geocoder(requireContext())
+
+            viewModel.getCurrentAddress(gCoder, fusedLocationClient)
+
+//            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+//                // Got last known location. In some rare situations this can be null.
+//                location?.apply {
+//                    val addresses: ArrayList<Address> =
+//                        ArrayList(gCoder.getFromLocation(this.latitude, this.longitude, 1))
+//
+//                    if (addresses.size > 0) {
+//                        val address = addresses[0]
+//
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "country: " + address.countryName,
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//
+//                        var addressString = ""
+//
+//                        for (i in 0..address.maxAddressLineIndex) {
+//                            addressString += address.getAddressLine(i) + " "
+//                        }
+//
+//                        Log.d(TAG, "Location received: " + addressString.trim())
+//
+//                        currentAddress = addressString
+//                        binding.mylocTitle.text =  + currentAddress
+//                    }
+//                }
+//            }
+        }
+    }
+
 }

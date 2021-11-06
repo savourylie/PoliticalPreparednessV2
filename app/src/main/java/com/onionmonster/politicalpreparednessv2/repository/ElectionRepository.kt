@@ -3,15 +3,12 @@ package com.onionmonster.politicalpreparednessv2.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.room.Database
 import com.onionmonster.politicalpreparednessv2.data.Address
 import com.onionmonster.politicalpreparednessv2.database.ElectionsDatabase
 import com.onionmonster.politicalpreparednessv2.database.asDomainModel
 import com.onionmonster.politicalpreparednessv2.network.getElectionTitles
 import com.onionmonster.politicalpreparednessv2.data.Election
 import com.onionmonster.politicalpreparednessv2.data.Representative
-import com.onionmonster.politicalpreparednessv2.database.DatabaseElection
-import com.onionmonster.politicalpreparednessv2.network.RepProperty
 import com.onionmonster.politicalpreparednessv2.network.asDatabaseModel
 import com.onionmonster.politicalpreparednessv2.network.getContests
 import kotlinx.coroutines.Dispatchers

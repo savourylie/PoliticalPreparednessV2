@@ -48,11 +48,17 @@ class RepSearchFragment : Fragment() {
                     Toast.makeText(context, "State not selected!", Toast.LENGTH_SHORT).show()
                 } else {
                     val myAddress = Address(
-                            addressLine1 = addressLine1.text.toString(),
-                            addressLine2 = addressLine2.text.toString(),
-                            city = city.text.toString(),
-                            state = stateValue.text.toString()
+                        wholeAddress = (addressLine1.text.toString()
+                                + " " + addressLine2.text.toString()
+                                + " " + city.text.toString()
+                                + " " + stateValue.text.toString())
                     )
+//                    val myAddress = Address(
+//                            addressLine1 = addressLine1.text.toString(),
+//                            addressLine2 = addressLine2.text.toString(),
+//                            city = city.text.toString(),
+//                            state = stateValue.text.toString()
+//                    )
 
                     viewModel!!.onSearchClicked(myAddress)
                 }

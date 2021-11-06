@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.onionmonster.politicalpreparednessv2.R
 import com.onionmonster.politicalpreparednessv2.data.Representative
@@ -34,19 +35,26 @@ class RepViewHolder private constructor (itemView: View): RecyclerView.ViewHolde
 
         webSiteIcon.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
-            browserIntent.data = Uri.parse(rep.webSiteUrl)
+
+            rep.webSiteUrl.apply {
+                browserIntent.data = Uri.parse(if (this.isEmpty()) "https://www.google.com" else this)
+            }
             context.startActivity(browserIntent)
         }
 
         facebookIcon.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
-            browserIntent.data = Uri.parse(rep.facebookUrl)
+            rep.facebookUrl.apply {
+                browserIntent.data = Uri.parse(if (this.isEmpty()) "https://www.google.com" else this)
+            }
             context.startActivity(browserIntent)
         }
 
         twitterIcon.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
-            browserIntent.data = Uri.parse(rep.twitterUrl)
+            rep.twitterUrl.apply {
+                browserIntent.data = Uri.parse(if (this.isEmpty()) "https://www.google.com" else this)
+            }
             context.startActivity(browserIntent)
         }
     }
