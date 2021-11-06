@@ -27,7 +27,7 @@ class ElectionRepository(private val database: ElectionsDatabase) {
         it.asDomainModel()
     }
 
-    val elections_saved: LiveData<List<Election>> = Transformations.map(database.electionDao.getSavedElections()) {
+    val electionsSaved: LiveData<List<Election>> = Transformations.map(database.electionDao.getSavedElections()) {
         it.asDomainModel()
     }
 
@@ -49,14 +49,14 @@ class ElectionRepository(private val database: ElectionsDatabase) {
         withContext(Dispatchers.IO) {
             val repProperty = getContests(address = address)
 
-//            if (repProperty != null) {
-//                Log.d(TAG, "Add some logic")
-//
-////                repProperty.contests
-//                }
+            if (repProperty != null) {
+                Log.d(TAG, "Add some logic")
 
+                database.repDao.insertAll(*repProperty.asDatabaseModel())
             }
         }
+
+        Log.d(TAG, "Reps refreshed.")
     }
 
     suspend fun getElectionSaveStatus(election: Election): Int? {

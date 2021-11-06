@@ -23,7 +23,7 @@ class SavedViewModel(application: Application):
     init {
     }
 
-    val electionList = electionRepository.elections_saved
+    val electionList = electionRepository.electionsSaved
 
     private val _navigateToElectionDetail = MutableLiveData<Election>()
     val navigateToElectionDetail: LiveData<Election>

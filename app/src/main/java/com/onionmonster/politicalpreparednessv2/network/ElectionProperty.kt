@@ -30,6 +30,7 @@ data class ElectionAdministrationBody(
 )
 
 
+
 //data class ElectionDetailsQueryProperty(
 //    val kind: String,
 //    val election: ElectionProperty,

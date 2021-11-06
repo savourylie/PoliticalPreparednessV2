@@ -41,11 +41,11 @@ class SavedFragment : Fragment() {
             adapter = electionAdapter
         }
 
-        viewModel.electionList.observe(viewLifecycleOwner, { elections_saved ->
-            elections_saved?.apply {
-                electionAdapter.submitList(elections_saved)
+        viewModel.electionList.observe(viewLifecycleOwner) { electionsSaved ->
+            electionsSaved?.apply {
+                electionAdapter.submitList(electionsSaved)
             }
-        })
+        }
 
         viewModel.navigateToElectionDetail.observe(viewLifecycleOwner, {
             if (it != null) {

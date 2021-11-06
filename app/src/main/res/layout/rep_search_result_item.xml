@@ -72,11 +72,10 @@
                 android:id="@+id/webSiteIcon"
                 android:layout_width="23dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="164dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/facebookIcon"
-                app:layout_constraintHorizontal_bias="0.825"
-                app:layout_constraintStart_toEndOf="@+id/rep_party"
+                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.937"
                 app:srcCompat="@drawable/ic_website_black_24dp" />
@@ -87,8 +86,8 @@
                 android:layout_height="23dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
-                app:layout_constraintHorizontal_bias="0.97"
-                app:layout_constraintStart_toEndOf="@+id/rep_party"
+                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.95"
                 app:srcCompat="@drawable/facebook_logo" />
@@ -99,8 +98,8 @@
                 android:layout_height="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.94"
-                app:layout_constraintStart_toEndOf="@+id/rep_party"
+                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.933"
                 app:srcCompat="@drawable/ic_iconmonstr_twitter_1" />
@@ -117,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="47dp" />
+                app:layout_constraintGuide_begin="48dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View

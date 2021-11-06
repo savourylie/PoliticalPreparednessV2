@@ -23,13 +23,13 @@ fun List<DatabaseElection>.asDomainModel(): List<Election> {
 
 @Entity(tableName = "representatives")
 data class DatabaseRepresentative constructor(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long?,
     val role: String,
     val name: String,
     val party: String,
-    val webSiteUrl: String,
-    val facebookUrl: String,
-    val twitterUrl: String
+    val webSiteUrl: String?,
+    val facebookUrl: String?,
+    val twitterUrl: String?
 )
 
 @JvmName("asDomainModelDatabaseRepresentative")
@@ -39,9 +39,9 @@ fun List<DatabaseRepresentative>.asDomainModel(): List<Representative> {
             role = it.role,
             name = it.name,
             party = it.party,
-            webSiteUrl = it.webSiteUrl,
-            facebookUrl = it.facebookUrl,
-            twitterUrl = it.twitterUrl
+            webSiteUrl = it.webSiteUrl ?: "",
+            facebookUrl = it.facebookUrl ?: "",
+            twitterUrl = it.twitterUrl ?: ""
         )
     }
 }
