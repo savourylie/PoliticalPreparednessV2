@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp"
+        tools:context=".mylocsearchscreen.MyLocationSearchFragment"
+        tools:showIn="@layout/fragment_my_location_search"
+        app:layoutDescription="@xml/content_motion_scene">
+
+        <TextView
+            android:id="@+id/myloc_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:fontFamily="@font/roboto_black"
+            android:paddingStart="21dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="26dp"
+            android:paddingEnd="23dp"
+            android:textSize="16sp"
+            android:text="My Representatives"
+            />
+</androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

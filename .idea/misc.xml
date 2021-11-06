@@ -11,11 +11,13 @@
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/election_item.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.15185185185185185" />
-        <entry key="app/src/main/res/layout/fragment_my_location_search.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_my_location_search.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_rep_search.xml" value="0.35885416666666664" />
         <entry key="app/src/main/res/layout/fragment_rep_search_result.xml" value="0.35885416666666664" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_upcoming.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/layout/fragment_upcoming_details.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/myloc_title.xml" value="0.4395833333333333" />
         <entry key="app/src/main/res/layout/rep_search_result_item.xml" value="0.67" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.29322916666666665" />
       </map>

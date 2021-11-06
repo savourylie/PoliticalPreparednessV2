@@ -13,20 +13,23 @@
         android:layout_height="match_parent"
         tools:context=".mylocsearchscreen.MyLocationSearchFragment">
 
-        <TextView
-            android:id="@+id/myloc_title"
-            android:layout_width="match_parent"
-            android:layout_height="81dp"
-            android:fontFamily="@font/roboto_black"
-            android:paddingStart="21dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="26dp"
-            android:paddingEnd="23dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp" />
+        <include layout="@layout/myloc_title_layout"
+         android:id="@+id/myloc_title"/>
+<!--        <TextView-->
+<!--            android:id="@+id/myloc_title"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="81dp"-->
+<!--            android:fontFamily="@font/roboto_black"-->
+<!--            android:paddingStart="21dp"-->
+<!--            android:paddingTop="15dp"-->
+<!--            android:paddingBottom="26dp"-->
+<!--            android:paddingEnd="23dp"-->
+<!--            android:textSize="16sp"-->
+<!--            android:text="My Representatives"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0"-->
+<!--            tools:layout_editor_absoluteX="0dp" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_myloc_result"

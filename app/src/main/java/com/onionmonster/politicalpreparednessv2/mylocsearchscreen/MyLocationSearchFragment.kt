@@ -77,17 +77,6 @@ class MyLocationSearchFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-
-        checkDeviceLocationSettingsAndGetAddress()
-
-        viewModel.currentAddress.observe(viewLifecycleOwner) {
-            binding.mylocTitle.text = it
-
-            viewModel.viewModelScope.launch {
-                viewModel.repRepository.refreshReps(Address(it))
-            }
-        }
-
         repAdapter = RepAdapter()
 
         binding.recyclerMylocResult.apply {
@@ -97,11 +86,20 @@ class MyLocationSearchFragment : Fragment() {
 
         viewModel.repList.observe(viewLifecycleOwner) {
             it?.apply {
+                Log.d(TAG, "repList submitted.")
+                Log.d(TAG, it.toString())
                 repAdapter.submitList(it)
             }
         }
 
+        checkDeviceLocationSettingsAndGetAddress()
 
+        viewModel.currentAddress.observe(viewLifecycleOwner) {
+            binding.mylocTitle.mylocTitleText.text = it
+            viewModel.viewModelScope.launch {
+                viewModel.repRepository.refreshReps(Address(it))
+            }
+        }
 
         return binding.root
     }
