@@ -37,7 +37,6 @@ class MyLocationSearchFragment : Fragment() {
     lateinit var binding: FragmentMyLocationSearchBinding
     private lateinit var viewModel: MyLocationSearchViewModel
     private lateinit var repAdapter: RepAdapter
-    var currentAddress = ""
 
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
@@ -158,34 +157,6 @@ class MyLocationSearchFragment : Fragment() {
 
             viewModel.getCurrentAddress(gCoder, fusedLocationClient)
 
-//            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-//                // Got last known location. In some rare situations this can be null.
-//                location?.apply {
-//                    val addresses: ArrayList<Address> =
-//                        ArrayList(gCoder.getFromLocation(this.latitude, this.longitude, 1))
-//
-//                    if (addresses.size > 0) {
-//                        val address = addresses[0]
-//
-//                        Toast.makeText(
-//                            requireContext(),
-//                            "country: " + address.countryName,
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//
-//                        var addressString = ""
-//
-//                        for (i in 0..address.maxAddressLineIndex) {
-//                            addressString += address.getAddressLine(i) + " "
-//                        }
-//
-//                        Log.d(TAG, "Location received: " + addressString.trim())
-//
-//                        currentAddress = addressString
-//                        binding.mylocTitle.text =  + currentAddress
-//                    }
-//                }
-//            }
         }
     }
 

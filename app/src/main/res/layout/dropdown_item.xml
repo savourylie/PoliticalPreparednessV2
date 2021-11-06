@@ -3,7 +3,7 @@
     android:id="@+id/textViewStates"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Arizona"
+    android:text="@string/dropdown_text_placeholder"
     android:textColor="#333333"
     android:textSize="14sp"
     android:textStyle="bold"

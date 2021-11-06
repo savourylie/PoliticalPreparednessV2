@@ -85,7 +85,7 @@
             android:stateListAnimator="@null"
             android:fontFamily="@font/roboto_black"
             android:lineSpacingExtra="4dp"
-            android:text="Follow Election"
+            android:text="@string/follow_election_button"
             android:textColor="@color/colorItemTitle"
             android:textAllCaps="false"
             app:cornerRadius="10dp"

@@ -26,9 +26,9 @@
 
                 android:fontFamily="@font/roboto_black"
                 android:paddingBottom="0dp"
-                android:text="President of the United States"
+                android:text="@string/rep_title_placeholder_text"
                 android:textColor="@color/colorItemTitle"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -42,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/roboto"
-                android:text="Donald J. Trump"
+                android:text="@string/rep_name_placeholder_text"
                 android:textColor="@color/colorMainText"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -58,9 +58,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/roboto"
-                android:text="Republican Party"
+                android:text="@string/rep_party_placeholder_text"
                 android:textColor="@color/colorMainText"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -78,7 +78,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.937"
-                app:srcCompat="@drawable/ic_website_black_24dp" />
+                app:srcCompat="@drawable/ic_website_black_24dp"
+                android:contentDescription="@string/website_icon_content_description" />
 
             <ImageView
                 android:id="@+id/facebookIcon"
@@ -90,7 +91,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.95"
-                app:srcCompat="@drawable/facebook_logo" />
+                app:srcCompat="@drawable/facebook_logo"
+                android:contentDescription="@string/facebook_icon_content_description" />
 
             <ImageView
                 android:id="@+id/twitterIcon"
@@ -102,7 +104,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.933"
-                app:srcCompat="@drawable/ic_iconmonstr_twitter_1" />
+                app:srcCompat="@drawable/ic_iconmonstr_twitter_1"
+                android:contentDescription="@string/twitter_icon_content_description" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"

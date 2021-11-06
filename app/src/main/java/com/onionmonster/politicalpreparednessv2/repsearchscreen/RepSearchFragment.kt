@@ -53,12 +53,6 @@ class RepSearchFragment : Fragment() {
                                 + " " + city.text.toString()
                                 + " " + stateValue.text.toString())
                     )
-//                    val myAddress = Address(
-//                            addressLine1 = addressLine1.text.toString(),
-//                            addressLine2 = addressLine2.text.toString(),
-//                            city = city.text.toString(),
-//                            state = stateValue.text.toString()
-//                    )
 
                     viewModel!!.onSearchClicked(myAddress)
                 }

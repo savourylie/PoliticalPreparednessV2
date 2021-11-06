@@ -22,7 +22,7 @@
             android:paddingTop="26dp"
             android:paddingBottom="26dp"
             android:paddingEnd="23dp"
-            android:text="My Representatives"
+            android:text="@string/rep_search_result_title_text"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

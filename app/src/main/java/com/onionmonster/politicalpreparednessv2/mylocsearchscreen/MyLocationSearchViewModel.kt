@@ -24,12 +24,6 @@ class MyLocationSearchViewModel(application: Application): AndroidViewModel(appl
     val repRepository = ElectionRepository(database)
     val currentAddress = MutableLiveData<String>()
 
-//    init {
-//        viewModelScope.launch {
-////            repRepository.refreshReps(address)
-//        }
-//    }
-
     val repList = repRepository.reps
 
     fun getCurrentAddress(gCoder: Geocoder, fusedLocationClient: FusedLocationProviderClient) {
@@ -50,7 +44,7 @@ class MyLocationSearchViewModel(application: Application): AndroidViewModel(appl
 
                     Log.d(TAG, "Location received: " + addressString.trim())
 
-                    currentAddress.value = "Rep for my Address: " + addressString
+                    currentAddress.value = "Rep for my Address: $addressString"
                 }
             }
         }

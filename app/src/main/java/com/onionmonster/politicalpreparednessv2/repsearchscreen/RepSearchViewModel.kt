@@ -20,17 +20,6 @@ class RepSearchViewModel: ViewModel() {
     val navigateToRepList: LiveData<Address>
         get() = _navigateToRepList
 
-//    fun fillAddressWithData(): Address {
-//        val myAddress = Address(
-//                addressLine1 = addressLine1.value!!,
-//                addressLine2 = addressLine2.value!!,
-//                city = city.value!!,
-//                state = state.value!!,
-//        )
-//
-//        return myAddress
-//    }
-
     fun onSearchClicked(address: Address) {
 
         Log.d(TAG, "onSearchClicked!")
