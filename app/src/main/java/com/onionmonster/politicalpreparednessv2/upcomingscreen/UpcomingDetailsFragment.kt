@@ -15,6 +15,8 @@ import android.util.Log
 class UpcomingDetailsFragment : Fragment() {
     val TAG = "Dev/" + javaClass.simpleName
 
+    private lateinit var viewModel: UpcomingDetailsViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +31,7 @@ class UpcomingDetailsFragment : Fragment() {
 
         binding.election = election
 
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(UpcomingDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(UpcomingDetailsViewModel::class.java)
         binding.viewModel = viewModel
 
         viewModel.electionSaveStatus.observe(viewLifecycleOwner, { saveStatus ->

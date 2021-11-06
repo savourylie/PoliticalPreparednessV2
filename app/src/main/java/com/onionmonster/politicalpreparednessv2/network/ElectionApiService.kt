@@ -2,6 +2,7 @@ package com.onionmonster.politicalpreparednessv2.network
 
 import android.util.Log
 import com.onionmonster.politicalpreparednessv2.Constants
+import com.onionmonster.politicalpreparednessv2.data.Address
 import com.onionmonster.politicalpreparednessv2.data.ElectionDetails
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
@@ -35,6 +36,15 @@ interface ElectionDetailsApiService {
     ): ElectionDetailsQueryProperty
 }
 
+interface RepContestApiService {
+    @GET("civicinfo/v2/voterinfo")
+    suspend fun getProperties(@Query("key") apiKey: String = Constants.API_KEY,
+                              @Query("electionId") electionId: String = "2000",
+                              @Query("address") address: String
+
+    ): RepProperty
+}
+
 // API objects
 object ElectionsApi {
     val retrofitService: ElectionApiService by lazy {
@@ -45,6 +55,12 @@ object ElectionsApi {
 object ElectionsDetailsApi {
     val retrofitService: ElectionDetailsApiService by lazy {
         retrofit.create(ElectionDetailsApiService::class.java)
+    }
+}
+
+object RepContestApi {
+    val retrofitService: RepContestApiService by lazy {
+        retrofit.create(RepContestApiService::class.java)
     }
 }
 
@@ -79,6 +95,18 @@ suspend fun getElectionDetails(electionId: String):
 
         electionDetailsQueryProperty
 
+    } catch (e: Exception) {
+        Log.d(TAG, "Failure: ${e.message}")
+        null
+    }
+}
+
+suspend fun getContests(address: Address): RepProperty? {
+    val TAG = "Dev/RepContestApiService"
+
+    return try {
+        val repProperty = RepContestApi.retrofitService.getProperties(address=address.toString())
+        repProperty
     } catch (e: Exception) {
         Log.d(TAG, "Failure: ${e.message}")
         null

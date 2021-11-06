@@ -10,4 +10,14 @@ data class Address(
     val addressLine2: String,
     val city: String,
     val state: String
-): Parcelable
+): Parcelable {
+    override fun toString(): String {
+        return addressLine1 +
+                " " +
+                addressLine2 +
+                " " +
+                city +
+                " " +
+                state
+    }
+}

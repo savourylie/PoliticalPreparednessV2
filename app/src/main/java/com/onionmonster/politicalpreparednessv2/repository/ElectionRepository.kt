@@ -4,12 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.room.Database
+import com.onionmonster.politicalpreparednessv2.data.Address
 import com.onionmonster.politicalpreparednessv2.database.ElectionsDatabase
 import com.onionmonster.politicalpreparednessv2.database.asDomainModel
 import com.onionmonster.politicalpreparednessv2.network.getElectionTitles
 import com.onionmonster.politicalpreparednessv2.data.Election
+import com.onionmonster.politicalpreparednessv2.data.Representative
 import com.onionmonster.politicalpreparednessv2.database.DatabaseElection
+import com.onionmonster.politicalpreparednessv2.network.RepProperty
 import com.onionmonster.politicalpreparednessv2.network.asDatabaseModel
+import com.onionmonster.politicalpreparednessv2.network.getContests
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -27,12 +31,30 @@ class ElectionRepository(private val database: ElectionsDatabase) {
         it.asDomainModel()
     }
 
+    val reps: LiveData<List<Representative>> = Transformations.map(database.repDao.getReps()) {
+        it.asDomainModel()
+    }
+
     suspend fun refreshElections() {
         withContext(Dispatchers.IO) {
             val electionQueryProperty = getElectionTitles()
 
             if (electionQueryProperty != null) {
                 database.electionDao.insertAll(*electionQueryProperty.asDatabaseModel())
+            }
+        }
+    }
+
+    suspend fun refreshReps(address: Address) {
+        withContext(Dispatchers.IO) {
+            val repProperty = getContests(address = address)
+
+//            if (repProperty != null) {
+//                Log.d(TAG, "Add some logic")
+//
+////                repProperty.contests
+//                }
+
             }
         }
     }

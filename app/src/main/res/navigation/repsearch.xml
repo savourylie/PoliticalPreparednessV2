@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/repsearch_result_fragment"
-        android:name="com.onionmonster.politicalpreparednessv2.repsearchscreen.RepSearchFragment"
+        android:name="com.onionmonster.politicalpreparednessv2.repsearchscreen.RepSearchResultFragment"
         android:label="@string/rep_search_label"
         tools:layout="@layout/fragment_rep_search_result">
 
