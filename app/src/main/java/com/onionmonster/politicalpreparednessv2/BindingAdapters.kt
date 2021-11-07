@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 @BindingAdapter("twitterUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     val TAG = "Dev/BindingAdapter"
-    val imgUrl = "https://pbs.twimg.com/profile_images/839166780165611520/v_lrshK__normal.jpg"
+//    val imgUrl = "https://pbs.twimg.com/profile_images/839166780165611520/v_lrshK__normal.jpg"
 
     Log.d(TAG, "Inside BindingAdapter: " + imgUrl.toString())
 
