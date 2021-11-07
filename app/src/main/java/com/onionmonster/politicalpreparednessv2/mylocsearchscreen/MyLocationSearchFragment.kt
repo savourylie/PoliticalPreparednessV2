@@ -76,7 +76,7 @@ class MyLocationSearchFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        repAdapter = RepAdapter()
+        repAdapter = RepAdapter(viewModel)
 
         binding.recyclerMylocResult.apply {
             setHasFixedSize(true)

@@ -1,5 +1,6 @@
 package com.onionmonster.politicalpreparednessv2.network
 
+import android.util.Log
 import com.onionmonster.politicalpreparednessv2.Constants.TW_BASE_URL
 import com.onionmonster.politicalpreparednessv2.Constants.TW_B_TOKEN
 import com.squareup.moshi.Moshi
@@ -45,5 +46,21 @@ class OAuthInterceptor(private val tokenType: String, private val accessToken: S
         request = request.newBuilder().header("Authorization", "$tokenType $accessToken").build()
 
         return chain.proceed(request)
+    }
+}
+
+suspend fun getProfileObject(twitterAccountId: String):
+        ProfilePicProperty? {
+
+    val TAG = "Dev/ProfilePicApiService"
+
+    return try {
+        val profilePicProperty = ProfilePicApi.retrofitService.getProfileProperties(username=twitterAccountId)
+
+        profilePicProperty
+
+    } catch (e: Exception) {
+        Log.d(TAG, "Failure: ${e.message}")
+        null
     }
 }

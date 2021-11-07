@@ -3,38 +3,31 @@ package com.onionmonster.politicalpreparednessv2.repsearchscreen
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.net.toUri
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.onionmonster.politicalpreparednessv2.R
+import com.onionmonster.politicalpreparednessv2.data.ProfilePic
 import com.onionmonster.politicalpreparednessv2.data.Representative
+import com.onionmonster.politicalpreparednessv2.databinding.RepSearchResultItemBinding
+import com.onionmonster.politicalpreparednessv2.network.asDomainModel
+import com.onionmonster.politicalpreparednessv2.network.getProfileObject
+import kotlinx.coroutines.launch
 
 
-class RepViewHolder private constructor (itemView: View): RecyclerView.ViewHolder(itemView) {
+class RepViewHolder private constructor (private var binding: RepSearchResultItemBinding): RecyclerView.ViewHolder(binding.root) {
+    private val TAG = javaClass.simpleName
 
-    private val context: Context = itemView.context
+    private val context: Context = binding.root.context
 
-    private val container: CardView = itemView.findViewById(R.id.rep_search_result_item)
-    private val role: TextView = itemView.findViewById(R.id.rep_role)
-    private val name: TextView = itemView.findViewById(R.id.rep_name)
-    private val party: TextView = itemView.findViewById(R.id.rep_party)
-    private val webSiteIcon: ImageView = itemView.findViewById(R.id.webSiteIcon)
-    private val facebookIcon: ImageView = itemView.findViewById(R.id.facebookIcon)
-    private val twitterIcon: ImageView = itemView.findViewById(R.id.twitterIcon)
-    private val twitterProfilePic: ImageView = itemView.findViewById(R.id.twitterProfilePic)
+    fun bind(rep: Representative, viewModel: AndroidViewModel) {
+        binding.repRole.text = rep.role
+        binding.repName.text = rep.name
+        binding.repParty.text = rep.party
 
-
-    fun bind(rep: Representative) {
-        role.text = rep.role
-        name.text = rep.name
-        party.text = rep.party
-
-        webSiteIcon.setOnClickListener {
+        binding.webSiteIcon.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
 
             rep.webSiteUrl.apply {
@@ -43,7 +36,7 @@ class RepViewHolder private constructor (itemView: View): RecyclerView.ViewHolde
             context.startActivity(browserIntent)
         }
 
-        facebookIcon.setOnClickListener {
+        binding.facebookIcon.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
             rep.facebookUrl.apply {
                 browserIntent.data = Uri.parse(if (this.isEmpty()) "https://www.google.com" else this)
@@ -51,22 +44,44 @@ class RepViewHolder private constructor (itemView: View): RecyclerView.ViewHolde
             context.startActivity(browserIntent)
         }
 
-        twitterIcon.setOnClickListener {
+        binding.twitterIcon.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
             rep.twitterUrl.apply {
                 browserIntent.data = Uri.parse(if (this.isEmpty()) "https://www.google.com" else this)
             }
             context.startActivity(browserIntent)
         }
+
+        viewModel.viewModelScope.launch {
+            Log.d(TAG, "TwitterUrl: " + rep.twitterUrl)
+
+            val twitterAccountId = parseTwitterUrlForId(rep.twitterUrl)
+
+            Log.d(TAG, "TwitterAccountId: " + twitterAccountId)
+
+            val profilePicProperty = getProfileObject(twitterAccountId)
+            val profilePic = profilePicProperty?.asDomainModel()
+                ?: ProfilePic(name = rep.name, username = "", profilePicUrl = "")
+
+            binding.profilePic = profilePic
+        }
+
+        binding.executePendingBindings()
     }
 
     companion object {
         fun from(parent: ViewGroup,
         ): RepViewHolder {
-            val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater.inflate(R.layout.rep_search_result_item, parent, false) as CardView
-
-            return RepViewHolder(view)
+            val binding = RepSearchResultItemBinding.inflate(LayoutInflater.from(parent.context))
+            return RepViewHolder(binding)
         }
+    }
+}
+
+fun parseTwitterUrlForId(twitterUrl: String): String {
+    return if (!twitterUrl.contains("/") || twitterUrl.last() == '/') {
+        ""
+    } else {
+        twitterUrl.split("/").last()
     }
 }

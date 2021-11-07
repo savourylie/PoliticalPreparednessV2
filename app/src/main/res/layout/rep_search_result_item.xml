@@ -2,6 +2,13 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="profilePic"
+            type="com.onionmonster.politicalpreparednessv2.data.ProfilePic" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/rep_search_result_item"
         android:layout_width="match_parent"
@@ -115,7 +122,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_face_black_24dp" />
+                app:twitterUrl="@{profilePic.profilePicUrl}"
+                tools:src="@drawable/ic_face_black_24dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

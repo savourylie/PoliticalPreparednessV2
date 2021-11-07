@@ -23,7 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_upcoming_details.xml" value="0.5" />
         <entry key="app/src/main/res/layout/myloc_title.xml" value="0.4395833333333333" />
         <entry key="app/src/main/res/layout/myloc_title_layout.xml" value="0.2609375" />
-        <entry key="app/src/main/res/layout/rep_search_result_item.xml" value="0.6649369903632321" />
+        <entry key="app/src/main/res/layout/rep_search_result_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.29322916666666665" />
       </map>
     </option>

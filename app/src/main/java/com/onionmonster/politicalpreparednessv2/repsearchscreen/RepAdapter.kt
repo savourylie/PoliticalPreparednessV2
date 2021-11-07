@@ -1,12 +1,13 @@
 package com.onionmonster.politicalpreparednessv2.repsearchscreen
 
 import android.view.ViewGroup
+import androidx.lifecycle.AndroidViewModel
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
 import com.onionmonster.politicalpreparednessv2.data.Representative
 
-class RepAdapter(): ListAdapter<Representative, RepViewHolder>(RepDiffCallback()) {
+class RepAdapter(val viewModel: AndroidViewModel): ListAdapter<Representative, RepViewHolder>(RepDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepViewHolder {
         return RepViewHolder.from(parent)
@@ -15,7 +16,7 @@ class RepAdapter(): ListAdapter<Representative, RepViewHolder>(RepDiffCallback()
     override fun onBindViewHolder(holder: RepViewHolder, position: Int) {
         val rep = getItem(position)
 
-        holder.bind(rep)
+        holder.bind(rep, viewModel)
     }
 }
 

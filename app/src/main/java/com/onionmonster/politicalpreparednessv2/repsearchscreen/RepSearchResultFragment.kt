@@ -41,7 +41,7 @@ class RepSearchResultFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        repAdapter = RepAdapter()
+        repAdapter = RepAdapter(viewModel)
 
         binding.recyclerRepSearchResult.apply {
             setHasFixedSize(true)
