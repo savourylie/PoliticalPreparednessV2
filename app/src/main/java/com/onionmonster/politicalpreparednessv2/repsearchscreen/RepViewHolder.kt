@@ -26,6 +26,7 @@ class RepViewHolder private constructor (itemView: View): RecyclerView.ViewHolde
     private val webSiteIcon: ImageView = itemView.findViewById(R.id.webSiteIcon)
     private val facebookIcon: ImageView = itemView.findViewById(R.id.facebookIcon)
     private val twitterIcon: ImageView = itemView.findViewById(R.id.twitterIcon)
+    private val twitterProfilePic: ImageView = itemView.findViewById(R.id.twitterProfilePic)
 
 
     fun bind(rep: Representative) {

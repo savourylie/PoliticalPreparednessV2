@@ -13,9 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".mylocsearchscreen.MyLocationSearchFragment">
 
-        <include layout="@layout/myloc_title_layout"
-         android:id="@+id/myloc_title"/>
-<!--        <TextView-->
+        <!--        <TextView-->
 <!--            android:id="@+id/myloc_title"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="81dp"-->
@@ -30,6 +28,18 @@
 <!--            app:layout_constraintTop_toTopOf="parent"-->
 <!--            app:layout_constraintVertical_bias="0.0"-->
 <!--            tools:layout_editor_absoluteX="0dp" />-->
+
+        <include
+            android:id="@+id/myloc_title"
+            layout="@layout/myloc_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_myloc_result"

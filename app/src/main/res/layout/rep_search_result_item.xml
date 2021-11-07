@@ -21,34 +21,34 @@
                 android:id="@+id/rep_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_weight="1"
 
+                android:layout_weight="1"
                 android:fontFamily="@font/roboto_black"
-                android:paddingBottom="0dp"
+                android:paddingStart="15dp"
                 android:text="@string/rep_title_placeholder_text"
                 android:textColor="@color/colorItemTitle"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/twitterProfilePic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.207" />
 
             <TextView
                 android:id="@+id/rep_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_width="93dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="1dp"
                 android:fontFamily="@font/roboto"
+                android:paddingStart="15dp"
                 android:text="@string/rep_name_placeholder_text"
                 android:textColor="@color/colorMainText"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/twitterProfilePic"
                 app:layout_constraintTop_toBottomOf="@+id/rep_role"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -56,17 +56,16 @@
                 android:id="@+id/rep_party"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/roboto"
+                android:paddingStart="15dp"
                 android:text="@string/rep_party_placeholder_text"
                 android:textColor="@color/colorMainText"
-                android:textSize="10sp"
+                android:textSize="8sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rep_name"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/twitterProfilePic" />
 
             <ImageView
                 android:id="@+id/webSiteIcon"
@@ -107,19 +106,17 @@
                 app:srcCompat="@drawable/ic_iconmonstr_twitter_1"
                 android:contentDescription="@string/twitter_icon_content_description" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="65dp" />
+            <ImageView
+                android:id="@+id/twitterProfilePic"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_face_black_24dp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="48dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View

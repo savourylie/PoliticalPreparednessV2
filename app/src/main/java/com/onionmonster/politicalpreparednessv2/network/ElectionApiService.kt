@@ -10,14 +10,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-val apiString = "https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyDERXLdN-Xrz6mCJA-VvOPHpaYqdXVeXs4&address=98008%20Univeristy%20Way%20Seattle%20WA&electionId=7051"
-
 private val moshi = Moshi.Builder()
     .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory())
     .build()
 
 private val retrofit = Retrofit.Builder()
-//    .addConverterFactory(ScalarsConverterFactory.create())
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(Constants.BASE_URL)
     .build()
